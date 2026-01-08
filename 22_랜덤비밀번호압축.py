@@ -111,7 +111,52 @@ def 비밀번호압축_최신_랜덤():
         zf.setpassword(비밀번호.encode())
         # zf.setpassword(b'hiPassword')
         zf.write('내정보.png')
-비밀번호압축_최신_랜덤()
+# 비밀번호압축_최신_랜덤()
 
 # 특수문자를 포함하여 압축 파일 비밀번호 랜덤 생성
 # 비밀번호압축_최신_랜덤_특수문자포함
+
+
+import glob
+def png파일모두압축하기():
+    문자열 = string.ascii_letters + string.digits
+    비밀번호 = "".join(random.choice(문자열) for _ in range(7))
+    print(f"생성된 비밀번호 : {비밀번호}")
+
+    with pyzipper.AESZipFile(
+        '랜덤비밀번호파일.zip',
+        'w',
+        compression=pyzipper.ZIP_DEFLATED,
+        encryption=pyzipper.WZ_AES
+    ) as zf:
+        zf.setpassword(비밀번호.encode())
+        # zf.setpassword(b'hiPassword')
+
+        for 파일 in glob.glob("*.png"):
+            zf.write(파일)
+        
+png파일모두압축하기()
+
+
+'''
+목적은 같으나.. 방식이 다른 두 가지 방법
+
+      비밀번호.encode()               vs      b'hiPassword'
+         encode()                          비밀번호가 고정일 때 사용
+         비밀번호가                       
+    변수(랜덤/입력값)일 때
+           사용 
+
+    소비자가 입력하거나 랜덤으로 출력되는       고정적인 비밀번호니까
+    비밀번호를 모두 확보한 다음에              이미 비밀번호 완성 끝난거잖습니까?
+    .encode() 컴퓨터가 이해할 수 있는         바로 비밀번호 컴퓨터가 이해할 수 있는
+    글자 방식으로 변환할거야                   글자 방식으로 변환하시죠 ^^
+    둘 다 결과는 byte 형태로 변환
+
+    컴퓨터에게 소비자가 입력하거나 랜덤으로 입력되어 컴퓨터가 예측할 수 없는 데이터를 가져온다.
+    컴퓨터에게 코드를 실행하며 미리 확보한 문자 비밀번호를 사용하겠다.
+
+glob.glob("*.png")            vs           if file.endswith(".png")
+오직 파일 찾기 전용                          파일 이외 폴더까지 모두 찾기
+if 보다 빠르고 깔끔                          모두 섬세하게 찾는만큼 glob 보다 느림
+'''
