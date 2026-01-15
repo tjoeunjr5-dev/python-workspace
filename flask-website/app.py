@@ -78,6 +78,12 @@ def about():
     '''
 
 
+# /image 라는 주소로 들어갔을 때 image-filter.html 화면이 보일 수 있도록 설정
+# image-filter h1 태그로 이미지 꾸미기 라는 제목 보이기!
+@app.route("/image")
+def image():
+    return render_template("image-filter.html")
+
 
 '''
 # https://naver.com/news/section/105
@@ -93,7 +99,8 @@ template = 틀, 양식
 '''
 
 if __name__ == "__main__":  # 만약 다른파일에서 불러올 때 import "파일이름" 형태로 작성
-    app.run(debug=True) # 개발 모드에서 True 
+    app.run(debug=True) 
+    # 개발 모드에서 True 
     #프로그램을 실행하는데, 어떤 문제가 발생하는지 개발자가 눈으로 보며
     #코드를 수정하기 위해서 True 로 설정하지만 클라이언트에게 전달 후에는 False 로 변경
 
