@@ -6,13 +6,77 @@ app = Flask(__name__) # 이제부터 이 파일을 웹사이트용 프로그램�
 # 파이썬이 이 가게이름은 뭐니?  현재 ㅇㅇ파일입니다. 알려주는 자동 이름표
 
 # https://naver.com/
+'''
 @app.route("/")        # 클라이언트가 어떤 URL로 들어왔을 때 어떤 기능을 보여줄지 연결
 def home():
     return render_template("index.html")
+'''
+
+@app.route("/")        # 클라이언트가 어떤 URL로 들어왔을 때 어떤 기능을 보여줄지 연결
+def home():
+    # DB 데이터 저장소에서 넘어온 데이터
+    # DB 와 Python이 연결되어 있다면 DB에 저장된
+    # ex) 이영희, 40, 수영 과 같은 데이터를 웹사이트에 보여줄 수 있다.
+    # name 이라는   이름은 db에서 가져온 데이터를 잠시 담아 보관하기 위한 데이터 공간
+    # age 이라는 이름 또한 db에서 가져온 데이터를 잠시 담아 보관하기 위한 데이터 공간
+    # 나중에 DB와 연결하여 데이터를 성공적으로 가져오게 된다면
+    # 홍길동 자리에는 DB에 저장되어 있는 이름이 들어갈 것
+    # DB와 연결한 상태가 아니기 때문에 홍길동 20 이라는 임의 데이터를 이용하여
+    # HTML에 DB에서 가져온 데이터를 어떻게 전달하는지 확인하는 로직 작성
+    name = "홍길동"
+    age = 20
+    return render_template("index.html", abc=name, xyz=age)
+'''
+()틀을 보여줄거야(어떤파일에서, 어떤 데이터들을 전달받을 수 있도록 설정하겠어! 설정은 0개 ~ n개 무제한 가능)
+abc = html 에서 db에서 가져온 데이터를 어떻게 보여줄 것인지 데이터를 담아가는 공간의 명칭
+xyz = html 에서 db에서 가져온 데이터를 어떻게 보여줄 것인지 데이터를 담아가는 공간의 명칭
+
+보통은 html에서 사용하는 변수명칭과 python에서 html로 전달하는 변수명칭을 동일하게 작성!
+회사에서 데이터를 가져오는 변수명칭이 최소 10
+render_template("index.html", abc=name, xyz=age)
+   <h1>{{abc}}님 환영합니다.</h1>
+    <h2>나이 : {{xyz}}세</h2>
+
+'''
+
+def 목록기능():
+    과일들 = ['참외','바나나','포도','사과']
+    for 과일하나씩담는변수공간 in 과일들:
+        print("현재 과일 : ", 과일하나씩담는변수공간)
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    # 방문자 명단
+    visitors=["김철수","이영희","박민수","최지원","정다은"]
+    # 방문자 정보
+    visitor_info = [
+        {"name":"김철수", "count":15}, # 0 번 째 목록에 존재하는 방문자 정보
+        {"name":"이영희", "count":23}, # 1 번 째 목록에 존재하는 방문자 정보
+        {"name":"박민수", "count":8},  # 2 번 째 목록에 존재하는 방문자 정보
+        {"name":"최지원", "count":31}, # 3 번 째 목록에 존재하는 방문자 정보
+        {"name":"정다은", "count":12}, # 4 번 째 목록에 존재하는 방문자 정보
+        
+        ]
+
+    외부링크리스트 = [
+        {"주소":"https://www.google.com", "도메인이름":"구글"},
+        {"주소":"https://www.naver.com", "도메인이름":"네이버"},
+        {"주소":"https://www.daum.net", "도메인이름":"다음"},
+    ]
+
+
+    return render_template("about.html", visitors=visitors, visitor_info=visitor_info, 
+                           외부링크리스트=외부링크리스트 )
+    '''
+
+    과일1번 = '참외'
+    과일2번 = '사과'
+    과일3번 = '포도'
+    과일4번 = '바나나'
+    과일들 = ['참외','바나나','포도','사과']
+    return render_template("about.html", fruits=과일들 )
+    '''
+
 
 
 '''
