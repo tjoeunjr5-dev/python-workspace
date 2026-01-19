@@ -4,6 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이미지필터</title>
+    <!-- css html 에 스타일을 입히는 작업 -->
+     <style>
+        /* 
+        
+        * = DOCTYPE html 부터 /html 까지 모든 태그에 적용 
+        현업팁 : 많은 css 작업자들이 
+        외부간격과 내부간격을 0으로 만든 상태에서 진행
+        box-sizing:border-box 형태로 진행]
+
+
+        content-box : 개발자가 지정한 틀에서 외부와 내부에 간격이 발생하면 그만큼 가로나 세로 너비가 커지게됨
+                      개발자는 매번 간격이 발생한 가로 세로 너비를 계산하여 html 태그 위치를 조정
+
+        border-box
+        */
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        h1{
+            color: white;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2rem;
+        }
+     </style>
 </head>
 <body>
     <h1>
@@ -60,7 +92,8 @@
                 input에 어떤 값을 써야하는지 hint 제공
                 radio와checkbox 안됨
     -->
-    <form>
+    <!-- 이미지 필터 적용 이미지 작업을 제출할 때는 반드시 multipart 를 선택해서 작업 -->
+    <form id="filterForm" enctype="multipart/form-data">
         <label for="파일선택">📸</label>
         <!--
         태그 내부에 style 을 쓴 후 디자인 작성 가능 사용 지양
@@ -71,19 +104,57 @@
                 실제로는 input 에서 파일선택이라는 input이 동작하지만
                 유저들 눈에는 📸 클릭했을 때 마치 파일 선택이 되는 것처럼 보임
                  type="file" 나의 컴퓨터에 존재하는 파일 선택
+                  style="display: none;"
         -->
-        <input id="파일선택" type="file" style="display: none;" required><br>
-        <label>대비 : </label>
-        <input type="number" step="0.1" value="1.3">
+        <input id="파일선택" name="image" type="file" required><br>
+        <div id="fileName">선택된 파일이 없습니다.</div>
+
+        <label for="대비">대비 : </label>
+        <input id="대비" name="contrast" type="number" step="0.1" value="1.3">
         <br>
-        <label>채도 : </label>
-        <input type="number" step="0.1" value="1.3">
+        <label for="채도">채도 : </label>
+        <input id="채도" name="saturation" type="number" step="0.1" value="1.3">
         <br>
-        <label>밝기 : </label>
-        <input type="number" step="0.1" value="1.3">
+        <label for="밝기">밝기 : </label>
+        <input id="밝기" name="brightness"type="number" step="0.1" value="1.3">
         <br>
         <button>필터 적용하기</button>
     </form>
+
+    <div id="previewArea">
+        <h3>필터 적용 결과</h3>
+        <img id="resultImage">
+    </div>
     <!-- 파이썬에서 만들어놓은 이미지필터를 html에서 선택하여 사용 -->
+</body>
+  
+    <script>
+        // 파일 선택 시 파일명 표시
+        document.getElementById('파일선택').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || '선택된 파일이 없습니다.';
+            document.getElementById('fileName').textContent = fileName;
+        });
+        // 폼 제출 처리
+        document.getElementById('filterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            try {
+                const response = await fetch('/apply-filter', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const imageUrl = URL.createObjectURL(blob);
+                    document.getElementById('resultImage').src = imageUrl;
+                    document.getElementById('previewArea').style.display = 'block';
+                } else {
+                    alert('필터 적용 중 오류가 발생했습니다.');
+                }
+            } catch (error) {
+                alert('에러: ' + error.message);
+            }
+        });
+    </script>
 </body>
 </html>
