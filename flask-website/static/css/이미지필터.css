@@ -1,0 +1,262 @@
+/* 기본 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, Arial, sans-serif;
+    background: #fafafa;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 헤더 */
+header {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    color: #262626;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 18px;
+    color: #262626;
+    margin-bottom: 15px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav a {
+    color: #0095f6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+nav a:hover {
+    opacity: 0.7;
+}
+
+/* 메인 콘텐츠 */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.upload-section,
+.preview-section {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* 파일 업로드 */
+.upload-area {
+    display: block;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+    background: #fafafa;
+    transition: all 0.3s;
+}
+
+.upload-area:hover {
+    border-color: #0095f6;
+    background: #f0f8ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 149, 246, 0.1);
+}
+
+.upload-area div {
+    pointer-events: none;
+}
+
+.upload-icon {
+    font-size: 48px;
+}
+
+.upload-text {
+    color: #999;
+    margin: 10px 0;
+}
+
+.file-name {
+    color: #262626;
+    font-weight: 500;
+}
+
+input[type="file"] {
+    display: none !important;
+}
+
+/* 필터 조절 */
+.filters {
+    margin: 20px 0;
+}
+
+.filter-item {
+    margin-bottom: 20px;
+}
+
+.filter-item label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #262626;
+}
+
+.filter-item span {
+    color: #0095f6;
+    font-weight: 600;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+    background: #0095f6;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* 버튼 */
+.btn-apply {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-apply:hover {
+    opacity: 0.9;
+}
+
+.btn-apply:disabled {
+    background: #ddd;
+    cursor: not-allowed;
+}
+
+/* 미리보기 */
+#preview {
+    width: 100%;
+    border-radius: 8px;
+    display: none;
+}
+
+#preview.show {
+    display: block;
+}
+
+.placeholder {
+    width: 100%;
+    height: 300px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+}
+
+/* 로딩 */
+.loading {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.loading.show {
+    display: block;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #0095f6;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 결과 */
+.result {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    display: none;
+}
+
+.result.show {
+    display: block;
+}
+
+.result-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    text-align: center;
+}
+
+.result-images p {
+    font-size: 12px;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.result-images img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+    .main-content,
+    .result-images {
+        grid-template-columns: 1fr;
+    }
+}
