@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 상세</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="header">
+    <h1 onclick="location.href='/'">MUSINSA</h1>
+</header>
+<main class="detail-container">
+    <div class="detail-card">
+        <img src="{{ product.image }}">
+
+        <div class="detail-info">
+            <h2>{{ product.title }}</h2>
+            <p class="price">{{ product.price_krw }}원</p>
+            <p>{{ product.description }}</p>
+
+            <button onclick="addToCart()">
+                장바구니 담기
+            </button>
+        </div>
+    </div>
+</main>
+
+<script>
+    const PRODUCT = {{ product | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/detail.js') }}"></script>
+
+</body>
+</html>

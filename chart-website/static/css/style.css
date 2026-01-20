@@ -1,0 +1,264 @@
+/* ==============================
+   1. RESET & GLOBAL
+   ============================== */
+
+/* 모든 브라우저 기본 여백 제거 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 전체 기본 스타일 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard",
+                 "Apple SD Gothic Neo", Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #111;
+    font-size: 14px;
+}
+
+/* a 태그 기본 제거 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ==============================
+   2. HEADER (무신사 스타일 핵심)
+   ============================== */
+
+.header {
+    background-color: #000;
+    color: #fff;
+
+    height: 64px;
+    padding: 0 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* MUSINSA 로고 */
+.header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+/* 장바구니 버튼 */
+.header button {
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.header button:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+/* ==============================
+   3. 공통 컨테이너
+   ============================== */
+
+.container {
+    width: 1200px;
+    margin: 40px auto;
+}
+
+/* ==============================
+   4. 상품 리스트 (메인 페이지)
+   ============================== */
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+
+/* 상품 카드 */
+.product-card {
+    background-color: #fff;
+    padding: 20px;
+
+    border: 1px solid #eee;
+    transition: all 0.2s ease;
+}
+
+/* 호버 시 살짝 강조 */
+.product-card:hover {
+    border-color: #000;
+}
+
+/* 상품 이미지 */
+.product-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+/* 상품명 */
+.product-card h3 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+
+    height: 40px;
+    overflow: hidden;
+}
+
+/* 가격 */
+.product-card p {
+    margin-top: 8px;
+    font-weight: 700;
+}
+
+/* 상세보기 버튼 */
+.product-card button {
+    width: 100%;
+    margin-top: 14px;
+
+    background-color: #000;
+    color: #fff;
+
+    border: none;
+    padding: 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.product-card button:hover {
+    opacity: 0.85;
+}
+
+/* ==============================
+   5. 상품 상세 페이지
+   ============================== */
+
+.detail-container {
+    width: 1000px;
+    margin: 60px auto;
+}
+
+/* 상세 카드 */
+.detail-card {
+    display: flex;
+    gap: 60px;
+    background-color: #fff;
+    padding: 40px;
+
+    border: 1px solid #eee;
+}
+
+/* 상세 이미지 */
+.detail-card img {
+    width: 400px;
+    height: 400px;
+    object-fit: contain;
+}
+
+/* 상세 정보 */
+.detail-info {
+    flex: 1;
+}
+
+/* 상품명 */
+.detail-info h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* 가격 */
+.detail-info .price {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+/* 설명 */
+.detail-info p {
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+/* 장바구니 버튼 */
+.detail-info button {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+
+    padding: 16px;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.detail-info button:hover {
+    opacity: 0.9;
+}
+
+/* ==============================
+   6. 장바구니 페이지
+   ============================== */
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 12px;
+
+    border: 1px solid #eee;
+}
+
+/* 장바구니 이미지 */
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+/* 장바구니 상품명 */
+.cart-item h3 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 6px;
+}
+
+/* 장바구니 가격 */
+.cart-item p {
+    font-weight: 700;
+}
+
+/* ==============================
+   7. 반응형 (기본만)
+   ============================== */
+
+@media (max-width: 1200px) {
+    .container,
+    .detail-container {
+        width: 95%;
+    }
+
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .detail-card {
+        flex-direction: column;
+        align-items: center;
+    }
+}
