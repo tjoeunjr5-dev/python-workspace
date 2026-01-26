@@ -33,24 +33,45 @@ def check_bound():
         t.undo() #마지막 이동 취소
 
 # 이동 함수 정의
+# 거북이의 위치가 바뀔 때 마다 거북이 위치 확인을 하기 위해서 작성
+# 거북이 위치를 변경할 때마다 update_status() 호출하여 매번 위치 새로 고쳐서 다시 작성하도록 만드는 것
 def move_up():
     t.setheading(90)  # 거북이가 위쪽으로    90도 바라보기
     t.forward(20)     # 20만큼 앞으로 가기
+    update_status()
 
 def move_down():
     t.setheading(270)  # 거북이가 아래쪽으로 270도 바라보기
     t.forward(20)     # 20만큼 앞으로 가기
+    update_status()
 
 def move_left():
     t.setheading(180) # 거북이가 왼쪽으로   180도 바라보기
     t.forward(20)     # 20만큼 앞으로 가기
+    update_status()
 
 def move_right():
     t.setheading(0)   # 거북이가 오른쪽으로   0도 바라보기
     t.forward(20)     # 20만큼 앞으로 가기
+    update_status()
 
 def clear_screen():
     t.clear()         # 그린 선 지우기
+    update_status()
+
+import random
+def chang_color():
+    # 무작위로 거북이 색상 변경
+    colors=['#FF5733', '#33FF57', '#3357FF', '#FFFF33', "cyan", "white"]
+    t.color(random.choice(colors))
+# 키보드에서 c 를 눌렀다 뗐을 때 거북이 색상 변경되게 하기
+# .onkeypress(기능, "키보드명칭") "키보드 명칭"에 해당하는 키보드를 눌렀다 떼었을 때 해당하는 기능 구현
+# c = 대문자 작성형태에서 c 키보드를 눌렀다 떼면 동작안하며,
+# 소문자 c를 입력해야 동작
+# C 에도 동시 작성
+screen.onkeypress(chang_color, "c")
+screen.onkeypress(chang_color, "C")
+
 
 # 키보드 이벤트 연결
 screen.listen()       # 사용자 입력을 기다림
@@ -58,8 +79,9 @@ screen.onkeypress(move_up, "Up")       #키보드 키에서 ↑
 screen.onkeypress(move_down, "Down")   #키보드 키에서 ↓
 screen.onkeypress(move_left, "Left")   #키보드 키에서 ←
 screen.onkeypress(move_right, "Right") #키보드 키에서 →
-screen.onkeypress(clear_screen, "space") # 키보드 c 모두 지우기
+screen.onkeypress(clear_screen, "space") # 키보드 space 모두 지우기
 
 # 창이 닫히지 않게 설정
-
+# 초기 상태 표시
+update_status()
 screen.mainloop()
